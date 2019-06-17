@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='content/player.css')}}" />
+<script src="{{url_for('static',filename='scripts/player.js')}}" charset="utf-8"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="row" id="searchboxarea">
+    <div class="col-md-12 form-group">
+        <input id="keyword" type="text" class="form-control" placeholder="Type keywords to search music!" autofocus></input>
+        <button id="reloadbutton" class="btn btn-warning"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span><span class="hidden-xs"> Reload Database</span></button>
+    </div>
+</div>
+
+<div class="row" id="musiclistarea">
+    <div class="col-md-12">
+        <div id="searchlist" class="list-group">
+
+        </div>
+    </div>
+</div>
+
+<div class="row" id="playercontrollerarea">
+    <div class="col-md-12">
+    <div id="seekbar">
+        <div></div>
+    </div>
+    <div class="text-center">
+	<div class="btn-group ">
+	    <button id="prev" type="button" class="btn btn-primary" data-toggle="tooltip" title="前へ">
+		<span class="glyphicon glyphicon-fast-backward" aria-hidden="true"></span>
+	    </button>
+	    <button id="play" type="button" class="btn btn-primary" data-toggle="tooltip" title="再生/一時停止">
+		<span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+	    </button>
+	    <button id="next" type="button" class="btn btn-primary" data-toggle="tooltip" title="次へ">
+		<span class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span>
+	    </button>
+	    <button id="shuffle" type="button" class="btn btn-primary" data-toggle="tooltip" title="シャッフル">
+		<span class="glyphicon glyphicon-random" aria-hidden="true"></span>
+	    </button>
+	    <button id="focusoncurrent" type="button" class="btn btn-primary" data-toggle="tooltip" title="再生中の場所に飛ぶ">
+		<span class="glyphicon glyphicon-record" aria-hidden="true"></span>
+	    </button>
+	</div>
+    </div>
+    </div>
+</div>
+
+
+
+<!-- reloading dialog -->
+<div class="modal fade" id="reloadingdialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Database Reloading</h4>
+            </div>
+            <div class="modal-body">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning progress-bar-striped active" style="width:100%;">
+                        Reloading Database....
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-dismiss="modal" disabled="disabled">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+{% endblock %}

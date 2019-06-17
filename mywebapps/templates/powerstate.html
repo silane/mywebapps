@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='content/powerstate.css') }}" />
+{% endblock %}
+
+{% block content %}
+
+<h1>PowerState</h1>
+
+<section>
+	<button class="btn btn-default" v-on:click="reload"><span class="reloadicon glyphicon glyphicon-refresh"></span>稼働状況更新</button>
+        <label>定期更新: <input type="checkbox" v-model="autoreloadingEnabled"/></label>
+</section>
+
+<section>
+	<table class="table">
+		<tbody>
+            {% raw %}
+            <tr v-for="machine in machines" v-bind:key="machine.name">
+                <td class="hidden-xs">{{ machine.name }}</td>
+                <td class="hidden-xs">{{ machine.ip }}</td>
+                <td class="hidden-xs">{{ machine.mac }}</td>
+                <td class="visible-xs-block"><a class="disabled-anchor" data-toggle="tooltip" v-bind:title="'IP: ' + machine.ip + '<br/>MAC: ' + machine.mac" data-html="true" data-placement="right">{{ machine.name }}</a></td>
+                <td>{{ machine.active ? '稼働中' : '休止中' }}</td>
+                <td>
+                    <div class="hidden-xs btn-group">
+                        <button v-if="machine.supportedmode.indexOf('wake')>=0" v-on:click="change_powerstate('wake',machine)" class="btn btn-default">起動</button>
+                        <button v-if="machine.supportedmode.indexOf('sleep')>=0" v-on:click="change_powerstate('sleep',machine)" class="btn btn-default">スリープ</button>
+                        <button v-if="machine.supportedmode.indexOf('suspend')>=0" v-on:click="change_powerstate('suspend',machine)" class="btn btn-default">休止状態</button>
+                        <button v-if="machine.supportedmode.indexOf('shutdown')>=0" v-on:click="change_powerstate('shutdown',machine)" class="btn btn-default">シャットダウン</button>
+                    </div>
+                    <div v-if="machine.supportedmode.length != 0" class="visible-xs-block btn-group">
+                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            操作<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li v-if="machine.supportedmode.indexOf('wake')>=0"><a v-on:click="change_powerstate('wake',machine)" class="state-button-wake">起動</a></li>
+                            <li v-if="machine.supportedmode.indexOf('sleep')>=0"><a v-on:click="change_powerstate('sleep',machine)" class="state-button-sleep">スリープ</a></li>
+                            <li v-if="machine.supportedmode.indexOf('suspend')>=0"><a v-on:click="change_powerstate('suspend',machine)" class="state-button-suspend">休止状態</a></li>
+                            <li v-if="machine.supportedmode.indexOf('shutdown')>=0"><a v-on:click="change_powerstate('shutdown',machine)" class="state-button-shutdown">シャットダウン</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            {% endraw %}
+		</tbody>
+	</table>
+</section>
+{% raw %}
+<section>
+    <ol>
+        <li v-for="req in requests">
+            {{ 'Requesting ' + req.name + ' to ' + req.state + '.' }}
+        </li>
+    </ol>
+</section>
+<section>
+    <button v-on:click="alerts.splice(0, alerts.length)" class="btn btn-default">Clear log</button>
+    <ol style="list-style-type:none">
+        <template v-for="alert in alerts">
+            <li v-bind:class="'alert alert-dismissible alert-'+alert.type">
+                <button class="close" data-dismiss="alert">x</button><strong>{{ alert.type=='success' ? '成功' : 'エラー' }}</strong>:  {{ alert.message }}
+            </li>
+        </template>
+    </ol>
+</section>
+{% endraw %}
+{% endblock %}
+
+{% block scripts %}
+<script src="../static/scripts/powerstate.js" charset="utf-8"></script>
+{% endblock %}

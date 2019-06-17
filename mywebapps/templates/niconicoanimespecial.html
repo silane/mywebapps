@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='content/niconicoanimespecial.css') }}" />
+{% endblock %}
+
+{% block content %}
+
+<h1>NiconicoAnimeSpecial</h1>
+
+<section>
+	<button class="btn btn-default" v-on:click="reload"><span class="reloadicon glyphicon glyphicon-refresh"></span>Reload</button>
+</section>
+
+<section>
+	<table class="table">
+		<tbody>
+            {% raw %}
+            <tr v-for="program in programs" v-bind:key="program.contentId">
+                <td><a :href="'https://live.nicovideo.jp/gate/' + program.contentId" target="_blank">{{ program.title }}</a></td>
+		<td><time :datetime="program.startTime.toISOString()">{{ program.startTime.toLocaleString() }}</time></td>
+            </tr>
+            {% endraw %}
+		</tbody>
+	</table>
+    {% raw %}
+    <div id="alert-area">
+        <ol style="list-style-type:none">
+            <template v-for="alert in alerts">
+                <li v-bind:class="'alert alert-dismissible alert-'+alert.type">
+                    <button class="close" data-dismiss="alert">x</button><strong>{{ alert.type=='success' ? 'Success' : 'Error' }}</strong>:  {{ alert.message }}
+                </li>
+            </template>
+        </ol>
+    </div>
+    {% endraw %}
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="../static/scripts/niconicoanimespecial.js" charset="utf-8"></script>
+{% endblock %}

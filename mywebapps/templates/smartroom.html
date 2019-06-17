@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<script src="{{url_for('static',filename='scripts/smartroom.js')}}" charset="utf-8"></script>
+{% endblock %}
+
+{% block content %}
+
+<h1>SmartRoom</h1>
+
+<section id="jobpanel">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            ジョブ
+        </div>
+        <div class="list-group">
+            <div class="list-group-item checkbox" data-jobid="test"><label><input type="checkbox">test</input></label></div>
+            <div class="list-group-item checkbox" data-jobid="morninglight"><label><input type="checkbox"><input type="time" value="07:00" id="alarm_time"/>に照明をつける</input></label></div>
+        </div>
+    </div>
+</section>
+
+<section id="controlpanel">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            照明
+        </div>
+        <div class="panel-body">
+            <div class="button-group" role="group">
+                <button class="btn btn-default" data-operationid="light-on">点灯</button>
+                <button class="btn btn-default" data-operationid="light-full">全灯</button>
+                <button class="btn btn-default" data-operationid="light-mini">豆球</button>
+                <button class="btn btn-default" data-operationid="light-off">消灯</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="alert-area">
+</section>
+
+{% endblock %}

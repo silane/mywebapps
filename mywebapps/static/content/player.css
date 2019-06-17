@@ -1,0 +1,75 @@
+.body-content > footer
+{
+	display: none;
+}
+
+.body-content > hr:last-of-type
+{
+	display: none;
+}
+
+html,body
+{
+	height: 100%;
+}
+
+.body-content
+{
+	height: 100%;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+}
+
+#searchboxarea
+{
+	grid-row: 1;
+	margin-top: 10px;
+}
+
+#searchboxarea > div
+{
+	display: grid;
+	grid-template-columns: 1fr auto;
+	grid-column-gap: 20px;
+}
+
+#musiclistarea
+{
+	grid-row: 2;
+	overflow: scroll;
+}
+
+#playercontrollerarea
+{
+	grid-row: 3;
+	margin-top: 8px;
+}
+
+#seekbar
+{
+	width: 100%;
+	height: 8px;
+	background-color: #c1d9ee;
+	border-radius: 8px;
+	overflow: hidden;
+	margin-bottom: 8px;
+	transition: height 0.3s;
+	cursor: pointer;
+}
+#seekbar:hover, #seekbar.seeking
+{
+	height: 16px;
+}
+#seekbar > div
+{
+	height: 100%;
+	background-color: #337ab7;
+	border-radius: inherit;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	transition: width 0.3s;
+}
+#seekbar.seeking > div
+{
+	transition: none;
+}

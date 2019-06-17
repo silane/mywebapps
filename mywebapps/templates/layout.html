@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title }} - My Web Applications</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='content/bootstrap.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='content/site.css') }}" />
+    <script src="{{ url_for('static', filename='scripts/modernizr-2.6.2.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/jquery-1.10.2.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/bootstrap.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/respond.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        $SCRIPT_ROOT={{ request.script_root|tojson|safe }};
+    </script>
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand"> My Web Applications</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('home.home') }}">Home</a></li>
+                    {% if not config['DISABLE_MUSICPLAYER'] %}
+                    <li><a href="{{ url_for('osu_music_player.index') }}">OsuMusicPlayer</a></li>
+                    {% endif %}
+                    <li><a href="{{ url_for('power_state.index') }}">PowerState</a></li>
+                    {% if not config['DISABLE_SMARTROOM'] %}
+                    <li><a href="{{ url_for('smartroom.index') }}">SmartRoom</a></li>
+                    {% endif %}
+                    <li><a href="{{ url_for('niconicoanimespecial.index') }}">NiconicoAnimeSpecial</a></li>
+                </ul>
+                {% if session.user is not defined or session.user==None %}
+                <a class="btn btn-default navbar-btn navbar-right" href="{{ url_for('home.login') }}">Log in</a>
+                {% else %}
+                <a class="btn btn-default navbar-btn navbar-right" href="{{ url_for('home.logout') }}">Log out</a>
+                {% endif %}
+                <p class="navbar-text navbar-right">Welcome {{ session.user|e if session.user is defined else 'guest' }}!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        {% block content %}{% endblock %}
+        <hr />
+        <footer>
+            <p>&copy; {{ year }} - My Flask Application</p>
+        </footer>
+    </div>
+
+    
+    {% block scripts %}{% endblock %}
+
+</body>
+</html>
