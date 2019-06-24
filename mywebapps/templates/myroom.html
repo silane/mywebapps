@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<script>
+    ROOMAN_URL = {{ config['ROOMAN_URL']|tojson|safe }};
+</script>
+<script src="{{url_for('static',filename='scripts/myroom.js')}}" ></script>
+{% endblock %}
+
+{% block content %}
+
+<h1>MyRoom</h1>
+{% raw %}
+<section>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            照明
+        </div>
+        <div class="panel-body">
+            <div class="btn-group" role="group">
+                <button class="btn btn-default" @click="invokeAction('light-on')">点灯</button>
+                <button class="btn btn-default" @click="invokeAction('light-full')">全灯</button>
+                <button class="btn btn-default" @click="invokeAction('light-mini')">豆球</button>
+                <button class="btn btn-default" @click="invokeAction('light-off')">消灯</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <button @click="alerts.splice(0, alerts.length)" class="btn btn-default">
+        Clear log
+    </button>
+    <ol style="list-style-type:none">
+        <li v-for="alert in alerts" :class="'alert alert-dismissible alert-' + alert.type">
+            <button class="close" data-dismiss="alert">x</button>
+            {{ alert.type === 'success' ? '成功' : 'エラー' }}: {{ alert.message }}
+        </li>
+    </ol>
+</section>
+{% endraw %}
+
+{% endblock %}

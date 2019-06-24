@@ -40,6 +40,7 @@
                     <li><a href="{{ url_for('smartroom.index') }}">SmartRoom</a></li>
                     {% endif %}
                     <li><a href="{{ url_for('niconicoanimespecial.index') }}">NiconicoAnimeSpecial</a></li>
+                    <li><a href="{{ url_for('myroom.index') }}">MyRoom</a></li>
                 </ul>
                 {% if session.user is not defined or session.user==None %}
                 <a class="btn btn-default navbar-btn navbar-right" href="{{ url_for('home.login') }}">Log in</a>

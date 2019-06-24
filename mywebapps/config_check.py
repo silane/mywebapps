@@ -2,9 +2,10 @@ from pathlib import Path
 from warnings import warn
 
 
-_REQUIRED_CONFIG_KEYS = ['SECRET_KEY', 'MUSIC_DIRECTORY', 'PING_COMMAND',
-                         'MACHINES_FILE', 'WAKEONLAN_COMMAND',
-                         'EDCBSENDSUSPEND_COMMAND', 'OSUDB_FILE']
+_REQUIRED_CONFIG_KEYS = [
+    'SECRET_KEY', 'MUSIC_DIRECTORY', 'PING_COMMAND',
+    'MACHINES_FILE', 'WAKEONLAN_COMMAND',
+    'EDCBSENDSUSPEND_COMMAND', 'OSUDB_FILE', 'ROOMAN_URL']
 
 
 def _key_not_found_message(key):

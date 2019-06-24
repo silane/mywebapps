@@ -22,6 +22,7 @@ def create_app(test_config=None):
     from .views.home import app as home
     from .views.power_state import app as power_state
     from .views.niconicoanimespecial import app as niconicoanimespecial
+    from .views.myroom import app as myroom
 
     app.register_blueprint(home)
     app.register_blueprint(power_state, url_prefix='/powerstate')
@@ -33,5 +34,6 @@ def create_app(test_config=None):
         app.register_blueprint(smartroom, url_prefix='/smartroom')
     app.register_blueprint(niconicoanimespecial,
                            url_prefix='/niconicoanimespecial')
+    app.register_blueprint(myroom, url_prefix='/myroom')
 
     return app
