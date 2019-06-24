@@ -60,7 +60,7 @@
     <ol style="list-style-type:none">
         <template v-for="alert in alerts">
             <li v-bind:class="'alert alert-dismissible alert-'+alert.type">
-                <button class="close" data-dismiss="alert">x</button><strong>{{ alert.type=='success' ? '成功' : 'エラー' }}</strong>:  {{ alert.message }}
+                <button class="close" data-dismiss="alert">x</button><strong>{{ alert.type === 'success' ? '成功' : 'エラー' }}</strong>:  {{ alert.message }}
             </li>
         </template>
     </ol>
