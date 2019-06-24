@@ -29,9 +29,6 @@ def create_app(test_config=None):
     if not app.config['DISABLE_MUSICPLAYER']:
         from .views.osu_music_player import app as osu_music_player
         app.register_blueprint(osu_music_player, url_prefix='/osumusicplayer')
-    if not app.config['DISABLE_SMARTROOM']:
-        from .views.smartroom import app as smartroom
-        app.register_blueprint(smartroom, url_prefix='/smartroom')
     app.register_blueprint(niconicoanimespecial,
                            url_prefix='/niconicoanimespecial')
     app.register_blueprint(myroom, url_prefix='/myroom')

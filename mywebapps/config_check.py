@@ -35,9 +35,7 @@ def check_config(config, instance_path):
 
     if 'DISABLE_MUSICPLAYER' not in config:
         config['DISABLE_MUSICPLAYER'] = False
-    if 'DISABLE_SMARTROOM' not in config:
-        config['DISABLE_SMARTROOM'] = False
-
+    
     if not _check_path(config['MACHINES_FILE'], instance_path):
         _warn('MACHINES_FILE',
               'The specified file "{config[MACHINES_FILE]}" not found.'.format(

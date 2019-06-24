@@ -36,9 +36,6 @@
                     <li><a href="{{ url_for('osu_music_player.index') }}">OsuMusicPlayer</a></li>
                     {% endif %}
                     <li><a href="{{ url_for('power_state.index') }}">PowerState</a></li>
-                    {% if not config['DISABLE_SMARTROOM'] %}
-                    <li><a href="{{ url_for('smartroom.index') }}">SmartRoom</a></li>
-                    {% endif %}
                     <li><a href="{{ url_for('niconicoanimespecial.index') }}">NiconicoAnimeSpecial</a></li>
                     <li><a href="{{ url_for('myroom.index') }}">MyRoom</a></li>
                 </ul>
