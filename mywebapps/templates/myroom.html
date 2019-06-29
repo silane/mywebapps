@@ -18,10 +18,12 @@
         </div>
         <div class="panel-body">
             <div class="btn-group" role="group">
-                <button class="btn btn-default" @click="invokeAction('light-on')">点灯</button>
                 <button class="btn btn-default" @click="invokeAction('light-full')">全灯</button>
+                <button class="btn btn-default" @click="invokeAction('light-on')">点灯</button>
                 <button class="btn btn-default" @click="invokeAction('light-mini')">豆球</button>
                 <button class="btn btn-default" @click="invokeAction('light-off')">消灯</button>
+                <button class="btn btn-default" @click="invokeAction('light-brighter')">明るく</button>
+                <button class="btn btn-default" @click="invokeAction('light-darker')">暗く</button>
             </div>
         </div>
     </div>
