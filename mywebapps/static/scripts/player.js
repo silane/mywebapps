@@ -72,7 +72,8 @@
             for (let item of data) {
                 let title=item.title_unicode ? item.title_unicode : item.title;
                 let artist=item.artist_unicode ? item.artist_unicode : item.artist;
-                list.append('<button class="musicitem list-group-item" data-musicid="' + item.id + '"><h5>' + title + '　　<small>' + artist + '</small></h5></button>')
+                list.append(`<li class="musicitem list-group-item list-group-item-action" data-musicid="${item.id}">
+${title}  <small>${artist}</small></li>`)
             }
 
             const firstItem=$('#searchlist > .musicitem:first')
@@ -111,13 +112,13 @@
     })
 
     music.onplay=function () {
-        $('#play > span').removeClass('glyphicon-play');
-        $('#play > span').addClass('glyphicon-pause');
+        $('#play > *').removeClass('fa-play');
+        $('#play > *').addClass('fa-pause');
     };
 
     music.onpause=function () {
-        $('#play > span').removeClass('glyphicon-pause');
-        $('#play > span').addClass('glyphicon-play');
+        $('#play > *').removeClass('fa-pause');
+        $('#play > *').addClass('fa-play');
     };
 
     function updateSeekbar() {

@@ -63,7 +63,7 @@ html,body
 #seekbar > div
 {
 	height: 100%;
-	background-color: #337ab7;
+	/* background-color: #337ab7; */
 	border-radius: inherit;
 	border-top-left-radius: 0px;
 	border-bottom-left-radius: 0px;

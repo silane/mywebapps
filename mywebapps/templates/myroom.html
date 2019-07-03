@@ -12,30 +12,30 @@
 <h1>MyRoom</h1>
 {% raw %}
 <section>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            照明
+    <div class="card">
+        <div class="card-header">
+            <h1 style="font-size: unset;">照明</h1>
         </div>
-        <div class="panel-body">
-            <div class="btn-group" role="group">
-                <button class="btn btn-default" @click="invokeAction('light-full')">全灯</button>
-                <button class="btn btn-default" @click="invokeAction('light-on')">点灯</button>
-                <button class="btn btn-default" @click="invokeAction('light-mini')">豆球</button>
-                <button class="btn btn-default" @click="invokeAction('light-off')">消灯</button>
-                <button class="btn btn-default" @click="invokeAction('light-brighter')">明るく</button>
-                <button class="btn btn-default" @click="invokeAction('light-darker')">暗く</button>
+        <div class="card-body">
+            <div class="btn-group">
+                <button class="btn btn-primary" @click="invokeAction('light-full')">全灯</button>
+                <button class="btn btn-primary" @click="invokeAction('light-on')">点灯</button>
+                <button class="btn btn-primary" @click="invokeAction('light-mini')">豆球</button>
+                <button class="btn btn-primary" @click="invokeAction('light-off')">消灯</button>
+                <button class="btn btn-primary" @click="invokeAction('light-brighter')">明るく</button>
+                <button class="btn btn-primary" @click="invokeAction('light-darker')">暗く</button>
             </div>
         </div>
     </div>
 </section>
 
 <section>
-    <button @click="alerts.splice(0, alerts.length)" class="btn btn-default">
+    <button @click="alerts.splice(0, alerts.length)" class="btn btn-outline-secondary">
         Clear log
     </button>
     <ol style="list-style-type:none">
         <li v-for="alert in alerts" :class="'alert alert-dismissible alert-' + alert.type">
-            <button class="close" data-dismiss="alert">x</button>
+            <button class="close" data-dismiss="alert">&times;</button>
             {{ alert.type === 'success' ? '成功' : 'エラー' }}: {{ alert.message }}
         </li>
     </ol>

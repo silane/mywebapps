@@ -8,41 +8,44 @@
 {% block content %}
 
 <div class="row" id="searchboxarea">
-    <div class="col-md-12 form-group">
-        <input id="keyword" type="text" class="form-control" placeholder="Type keywords to search music!" autofocus></input>
-        <button id="reloadbutton" class="btn btn-warning"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span><span class="hidden-xs"> Reload Database</span></button>
-    </div>
+    <form class="col-12 form-group row">
+        <input id="keyword" type="text" class="form-control col" placeholder="Type keywords to search music!" autofocus></input>
+        <button id="reloadbutton" class="btn btn-warning col-auto ml-3">
+            <i class="fas fa-sync-alt"></i>
+            <span class="hidden-xs"> Reload Database</span>
+        </button>
+    </form>
 </div>
 
 <div class="row" id="musiclistarea">
-    <div class="col-md-12">
-        <div id="searchlist" class="list-group">
+    <div class="col-12">
+        <ol id="searchlist" class="list-group">
 
-        </div>
+        </ol>
     </div>
 </div>
 
 <div class="row" id="playercontrollerarea">
-    <div class="col-md-12">
+    <div class="col-12">
     <div id="seekbar">
-        <div></div>
+        <div class="bg-primary"></div>
     </div>
     <div class="text-center">
 	<div class="btn-group ">
 	    <button id="prev" type="button" class="btn btn-primary" data-toggle="tooltip" title="前へ">
-		<span class="glyphicon glyphicon-fast-backward" aria-hidden="true"></span>
+		<i class="fas fa-backward"></i>
 	    </button>
 	    <button id="play" type="button" class="btn btn-primary" data-toggle="tooltip" title="再生/一時停止">
-		<span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+		<i class="fas fa-play"></i>
 	    </button>
 	    <button id="next" type="button" class="btn btn-primary" data-toggle="tooltip" title="次へ">
-		<span class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span>
+		<i class="fas fa-forward"></i>
 	    </button>
 	    <button id="shuffle" type="button" class="btn btn-primary" data-toggle="tooltip" title="シャッフル">
-		<span class="glyphicon glyphicon-random" aria-hidden="true"></span>
+		<i class="fas fa-random"></i>
 	    </button>
 	    <button id="focusoncurrent" type="button" class="btn btn-primary" data-toggle="tooltip" title="再生中の場所に飛ぶ">
-		<span class="glyphicon glyphicon-record" aria-hidden="true"></span>
+		<i class="fas fa-dot-circle"></i>
 	    </button>
 	</div>
     </div>

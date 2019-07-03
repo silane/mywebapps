@@ -2,14 +2,29 @@
 <html lang="ja">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
     <title>{{ title }} - My Web Applications</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='content/bootstrap.min.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='content/site.css') }}" />
-    <script src="{{ url_for('static', filename='scripts/modernizr-2.6.2.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/jquery-1.10.2.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/bootstrap.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/respond.js') }}"></script>
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+
+    <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
     <script>
@@ -19,35 +34,41 @@
 </head>
 
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="/" class="navbar-brand"> My Web Applications</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('home.home') }}">Home</a></li>
-                    {% if not config['DISABLE_MUSICPLAYER'] %}
-                    <li><a href="{{ url_for('osu_music_player.index') }}">OsuMusicPlayer</a></li>
-                    {% endif %}
-                    <li><a href="{{ url_for('power_state.index') }}">PowerState</a></li>
-                    <li><a href="{{ url_for('niconicoanimespecial.index') }}">NiconicoAnimeSpecial</a></li>
-                    <li><a href="{{ url_for('myroom.index') }}">MyRoom</a></li>
-                </ul>
-                {% if session.user is not defined or session.user==None %}
-                <a class="btn btn-default navbar-btn navbar-right" href="{{ url_for('home.login') }}">Log in</a>
-                {% else %}
-                <a class="btn btn-default navbar-btn navbar-right" href="{{ url_for('home.logout') }}">Log out</a>
+    <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark flex-row">
+        <a class="navbar-brand" href="/">My Web Applications</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="nav navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('home.home') }}">Home</a>
+                </li>
+                {% if not config['DISABLE_MUSICPLAYER'] %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('osu_music_player.index') }}">OsuMusicPlayer</a>
+                </li>
                 {% endif %}
-                <p class="navbar-text navbar-right">Welcome {{ session.user|e if session.user is defined else 'guest' }}!</p>
-            </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('power_state.index') }}">PowerState</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('niconicoanimespecial.index') }}">NiconicoAnimeSpecial</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('myroom.index') }}">MyRoom</a>
+                </li>
+            </ul>
+            <span class="navbar-text ml-auto mr-3">Welcome {{ session.user|e if session.user is defined else 'guest' }}!</span>
+            {% if session.user is not defined or session.user==None %}
+            <a class="btn btn-outline-success" href="{{ url_for('home.login') }}">Log in</a>
+            {% else %}
+            <a class="btn btn-outline-danger" href="{{ url_for('home.logout') }}">Log out</a>
+            {% endif %}
         </div>
-    </div>
+    </nav>
+    </header>
 
     <div class="container body-content">
         {% block content %}{% endblock %}
