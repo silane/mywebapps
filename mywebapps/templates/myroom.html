@@ -4,20 +4,30 @@
 <script>
     ROOMAN_URL = {{ config['ROOMAN_URL']|tojson|safe }};
 </script>
+<script type="module">
+    import {Time, cmp} from '/common/scripts/datetime.mjs';
+    window.Time = Time;
+    window.cmp = cmp;
+</script>
 <script src="{{url_for('static',filename='scripts/myroom.js')}}" ></script>
 {% endblock %}
 
 {% block content %}
 
-<h1>MyRoom</h1>
 {% raw %}
+<div class="row">
+    <h1 class="col">MyRoom</h1>
+    <div class="col-auto align-self-center">
+        <button class="btn btn-outline-secondary" @click="reloadJobList()">更新</button>
+    </div>
+</div>
 <section>
     <div class="card">
         <div class="card-header">
             <h1 style="font-size: unset;">照明</h1>
         </div>
         <div class="card-body">
-            <div class="btn-group">
+            <div class="btn-group my-2">
                 <button class="btn btn-primary" @click="invokeAction('light-full')">全灯</button>
                 <button class="btn btn-primary" @click="invokeAction('light-on')">点灯</button>
                 <button class="btn btn-primary" @click="invokeAction('light-mini')">豆球</button>
@@ -25,12 +35,30 @@
                 <button class="btn btn-primary" @click="invokeAction('light-brighter')">明るく</button>
                 <button class="btn btn-primary" @click="invokeAction('light-darker')">暗く</button>
             </div>
+            <div class="card">
+            <div class="card-header"><h1 style="font-size: unset;">アラーム</h1></div>
+            <div class="card-body">
+                <div class="my-2">
+                    <label>時刻: <input type="time" v-model="newAlarmTime" /></label>
+                    <button class="btn btn-primary" @click="newAlarm().then(x => reloadJobList())">アラーム追加</button>
+                </div>
+            <ul class="list-group">
+                <li class="list-group-item" v-for="job in jobs.filter(
+                    x => x.jobTypeID === 'alarm').sort((a, b) => cmp(a.state.time, b.state.time))">
+                    {{ job.state.time.strftime('%H:%M') }}
+                    <button class="btn btn-outline-secondary" @click="deleteJob(job.jobID).then(x => reloadJobList())">
+                        削除
+                    </button>
+                </li>
+            </ul>
+            </div>
+            </div>
         </div>
     </div>
 </section>
 
 <section>
-    <button @click="alerts.splice(0, alerts.length)" class="btn btn-outline-secondary">
+    <button @click="alerts.splice(0, alerts.length)" class="btn btn-outline-secondary my-2">
         Clear log
     </button>
     <ol style="list-style-type:none">
