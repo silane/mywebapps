@@ -9,7 +9,8 @@
 <h1>PowerState</h1>
 
 <section>
-	<button class="btn btn-outline-secondary" v-on:click="reload">
+    <button class="btn btn-outline-secondary" v-on:click="reload"
+            :disabled="reloading">
         <i class="reloadicon fas fa-sync-alt" :class="{active: reloading}"></i>
         稼働状況更新
     </button>
