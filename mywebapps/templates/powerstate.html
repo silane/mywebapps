@@ -10,7 +10,8 @@
 
 <section>
 	<button class="btn btn-outline-secondary" v-on:click="reload">
-        <i class="reloadicon fas fa-sync-alt"></i>稼働状況更新
+        <i class="reloadicon fas fa-sync-alt" :class="{active: reloading}"></i>
+        稼働状況更新
     </button>
     <label class="form-check-label">定期更新: <input type="checkbox" v-model="autoreloadingEnabled" /></label>
 </section>

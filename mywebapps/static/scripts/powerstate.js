@@ -1,6 +1,7 @@
 const vm = new Vue({
     el: '.body-content',
-    data: { alerts: [], machines: [], requests: [], autoreloadingEnabled: false },
+    data: { alerts: [], machines: [], requests: [],
+            autoreloadingEnabled: false, reloading: false },
     watch: {
         autoreloadingEnabled(val, oldVal) {
             if(val && !oldVal) {
@@ -16,10 +17,9 @@ const vm = new Vue({
     },
     methods: {
         reload: async function () {
-            const reloadicon = $(".reloadicon");
-            if (reloadicon.hasClass("active"))
+            if(this.reloading)
                 return;
-            reloadicon.addClass("active");
+            this.reloading = true;
             let data = null;
             try {
                 const response = await fetch('getmachines');
@@ -33,7 +33,7 @@ const vm = new Vue({
             } catch(e) {
                 this.alerts.unshift({type: 'danger', message: `Error reloading machine list: ${e}`});
             } finally {
-                $(".reloadicon").removeClass("active");
+                this.reloading = false;
             }
             if(data !== null) {
                 this.machines = data;
