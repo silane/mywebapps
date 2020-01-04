@@ -27,16 +27,17 @@ def query():
                 b.creator_name, b.song_source, b.song_tags,
                 )) for keyword in keywords)]
     dbresult = [x for x in dbresult if x.beatmapset_id != 2 ** 32 - 1]
-    dbresult.sort(key=lambda b: b.last_modification_time)
     return json.jsonify([{
         'id': b.beatmapset_id,
         'title': b.song_title,
         'artist': b.artist_name,
         'creator': b.creator_name,
+        'last_modification_time': b.last_modification_time.isoformat(),
         'source': b.song_source,
         'tags': b.song_tags.split(),
         'title_unicode': b.song_title_unicode,
-        'artist_name_unicode': b.artist_name_unicode} for b in dbresult])
+        'artist_name_unicode': b.artist_name_unicode
+    } for b in dbresult])
 
 
 @app.route('/musicfile/<int:id>')

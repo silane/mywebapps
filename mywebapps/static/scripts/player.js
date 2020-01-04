@@ -67,6 +67,7 @@
         $.getJSON('query', {
             keyword: keywords
         }).done(function (data) {
+            data.sort((a, b) => a.last_modification_time.localeCompare(b.last_modification_time))
             list.empty()
             for (let item of data) {
                 const title = item.title_unicode || item.title;
