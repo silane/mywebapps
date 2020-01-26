@@ -16,7 +16,7 @@
         if (response.ok)
           response.json().then(resp => {
             for(program of resp)
-              program.startTime = new Date(program.startTime);
+              program.startTime = datetime.DateTime.fromISOFormat(program.startTime);
             this.programs = resp;
           }, error => {
             this.alerts.unshift({

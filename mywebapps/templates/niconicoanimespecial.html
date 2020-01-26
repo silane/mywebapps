@@ -1,7 +1,8 @@
 {% extends "layout.html" %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='content/niconicoanimespecial.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='content/niconicoanimespecial.css') }}" />
+<script src="{{ url_for('static', filename='scripts/datetime.umd.js') }}"></script>
 {% endblock %}
 
 {% block content %}
@@ -20,7 +21,7 @@
             {% raw %}
             <tr v-for="program in programs" v-bind:key="program.contentId">
                 <td><a :href="'https://live.nicovideo.jp/gate/' + program.contentId" target="_blank">{{ program.title }}</a></td>
-		<td><time :datetime="program.startTime.toISOString()">{{ program.startTime.toLocaleString() }}</time></td>
+		<td><time :datetime="program.startTime.isoFormat()">{{ program.startTime.strftime('%m/%d(%a) %H:%M') }}</time></td>
             </tr>
             {% endraw %}
 		</tbody>
