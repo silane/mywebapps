@@ -4,12 +4,8 @@
 <script>
   ROOMAN_URL = {{ config['ROOMAN_URL']|tojson|safe }};
 </script>
-<script type="module">
-  import {Time, cmp} from '/common/scripts/datetime.js';
-  window.Time = Time;
-  window.cmp = cmp;
-</script>
-<script src="{{url_for('static',filename='scripts/myroom.js')}}" ></script>
+<script src="{{ url_for('static',filename='scripts/datetime.umd.js') }}"></script>
+<script src="{{ url_for('static',filename='scripts/myroom.js') }}"></script>
 {% endblock %}
 
 {% block content %}

@@ -7,7 +7,7 @@ new Vue({
         newAlarmTime: '',
     }},
     computed: {
-        cmp() { return cmp; },
+        cmp() { return datetime.cmp; },
     },
     async created() {
         await this.reloadJobList();
@@ -79,9 +79,9 @@ new Vue({
                             ret.error = 'error_code';
                         } else {
                             let time = state.time;
-                            time = new Time(Math.floor(time / 3600),
-                                            Math.floor(time / 60) % 60,
-                                            time % 60);
+                            time = new datetime.Time(Math.floor(time / 3600),
+                                                     Math.floor(time / 60) % 60,
+                                                     time % 60);
                             ret.state = {time};
                         }
                         break;
